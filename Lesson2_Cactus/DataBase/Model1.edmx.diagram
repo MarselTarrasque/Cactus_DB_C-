@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb644926bca64093b93e53697fb8a1f6" Name="Diagram1">
+        <EntityTypeShape EntityType="Collection_of_rare_cactiModel.Cactus" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Collection_of_rare_cactiModel.Contestant" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Collection_of_rare_cactiModel.Exibitions" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Collection_of_rare_cactiModel.Rewarded_Cactuses" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Collection_of_rare_cactiModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="Collection_of_rare_cactiModel.FK_Contestant_Cactus" ManuallyRouted="false" />
+        <AssociationConnector Association="Collection_of_rare_cactiModel.FK_Rewarded_Cactuses_Cactus" ManuallyRouted="false" />
+        <AssociationConnector Association="Collection_of_rare_cactiModel.FK_Contestant_Exibitions" ManuallyRouted="false" />
+        <AssociationConnector Association="Collection_of_rare_cactiModel.FK_Rewarded_Cactuses_Exibitions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

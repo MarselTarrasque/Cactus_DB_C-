@@ -1,0 +1,29 @@
+﻿<Page x:Class="Lesson2_Cactus.Pages.RegExibition"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lesson2_Cactus.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegExibition">
+
+    <Grid>
+
+        <Image Margin="0,0,10,0" Source="/Image3.png" Stretch="Fill"/>
+        <Button x:Name="BackBtn" Content="&lt;" HorizontalAlignment="Left" Height="50" Margin="24,361,0,0" VerticalAlignment="Top" Width="50" Click="BackBtn_Click"/>
+        <TextBox x:Name="NameTxt" HorizontalAlignment="Left" Height="90" Margin="24,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontSize="24"/>
+        <Label Content="Название выставки" HorizontalAlignment="Left" Height="40" Margin="46,13,0,0" VerticalAlignment="Top" Width="186" FontSize="20"/>
+        <Label Content="Дата выставки" HorizontalAlignment="Left" Height="40" Margin="301,13,0,0" VerticalAlignment="Top" Width="142" FontSize="20"/>
+        <TextBox x:Name="PlaceTxt" HorizontalAlignment="Left" Height="90" Margin="24,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontSize="24"/>
+        <Label Content="Место проведения" HorizontalAlignment="Left" Height="40" Margin="46,160,0,0" VerticalAlignment="Top" Width="186" FontSize="20"/>
+        <Calendar x:Name="DateCal" HorizontalAlignment="Left" Height="167" Margin="282,53,0,0" VerticalAlignment="Top" Width="180"/>
+        <TextBox x:Name="RewardTxt" HorizontalAlignment="Left" Height="90" Margin="523,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontSize="24"/>
+        <Label Content="Награда" HorizontalAlignment="Left" Height="40" Margin="592,13,0,0" VerticalAlignment="Top" Width="92" FontSize="20"/>
+        <TextBox x:Name="CommTxt" HorizontalAlignment="Left" Height="90" Margin="523,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontSize="24"/>
+        <Label Content="Комментарии" HorizontalAlignment="Left" Height="40" Margin="568,160,0,0" VerticalAlignment="Top" Width="140" FontSize="20"/>
+        <Button x:Name="CreateBtn" Content="Создать выставку" HorizontalAlignment="Left" Height="40" Margin="139,366,0,0" VerticalAlignment="Top" Width="136" Click="CreateBtn_Click"/>
+        
+
+    </Grid>
+</Page>

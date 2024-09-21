@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Collection_of_rare_cactiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cactus">
+          <Key>
+            <PropertyRef Name="ID_Cactus" />
+          </Key>
+          <Property Name="ID_Cactus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Cactus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type_of_cactus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age_cactus" Type="int" />
+          <Property Name="Origins_cactus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cost_cactus" Type="int" />
+          <Property Name="Manuals_cactus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contestant">
+          <Key>
+            <PropertyRef Name="ID_Constestant" />
+          </Key>
+          <Property Name="ID_Cactus" Type="int" Nullable="false" />
+          <Property Name="ID_Exibition" Type="int" />
+          <Property Name="ID_Constestant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exibitions">
+          <Key>
+            <PropertyRef Name="ID_Exibition" />
+          </Key>
+          <Property Name="ID_Exibition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Exibition" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Exibition" Type="date" />
+          <Property Name="Place_Exibition" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rewards_Exibition" Type="nvarchar" MaxLength="50" />
+          <Property Name="Commentaries" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rewarded_Cactuses">
+          <Key>
+            <PropertyRef Name="ID_RewardCactuses" />
+          </Key>
+          <Property Name="ID_RewardCactuses" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cactus" Type="int" />
+          <Property Name="ID_Exibition" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Contestant_Cactus">
+          <End Role="Cactus" Type="Self.Cactus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Contestant" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cactus">
+              <PropertyRef Name="ID_Cactus" />
+            </Principal>
+            <Dependent Role="Contestant">
+              <PropertyRef Name="ID_Cactus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contestant_Exibitions">
+          <End Role="Exibitions" Type="Self.Exibitions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Contestant" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exibitions">
+              <PropertyRef Name="ID_Exibition" />
+            </Principal>
+            <Dependent Role="Contestant">
+              <PropertyRef Name="ID_Exibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewarded_Cactuses_Cactus">
+          <End Role="Cactus" Type="Self.Cactus" Multiplicity="0..1" />
+          <End Role="Rewarded_Cactuses" Type="Self.Rewarded_Cactuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cactus">
+              <PropertyRef Name="ID_Cactus" />
+            </Principal>
+            <Dependent Role="Rewarded_Cactuses">
+              <PropertyRef Name="ID_Cactus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewarded_Cactuses_Exibitions">
+          <End Role="Exibitions" Type="Self.Exibitions" Multiplicity="0..1" />
+          <End Role="Rewarded_Cactuses" Type="Self.Rewarded_Cactuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exibitions">
+              <PropertyRef Name="ID_Exibition" />
+            </Principal>
+            <Dependent Role="Rewarded_Cactuses">
+              <PropertyRef Name="ID_Exibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Collection_of_rare_cactiModelContainer">
+          <EntitySet Name="Cactus" EntityType="Self.Cactus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contestant" EntityType="Self.Contestant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exibitions" EntityType="Self.Exibitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rewarded_Cactuses" EntityType="Self.Rewarded_Cactuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contestant_Cactus" Association="Self.FK_Contestant_Cactus">
+            <End Role="Cactus" EntitySet="Cactus" />
+            <End Role="Contestant" EntitySet="Contestant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contestant_Exibitions" Association="Self.FK_Contestant_Exibitions">
+            <End Role="Exibitions" EntitySet="Exibitions" />
+            <End Role="Contestant" EntitySet="Contestant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewarded_Cactuses_Cactus" Association="Self.FK_Rewarded_Cactuses_Cactus">
+            <End Role="Cactus" EntitySet="Cactus" />
+            <End Role="Rewarded_Cactuses" EntitySet="Rewarded_Cactuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewarded_Cactuses_Exibitions" Association="Self.FK_Rewarded_Cactuses_Exibitions">
+            <End Role="Exibitions" EntitySet="Exibitions" />
+            <End Role="Rewarded_Cactuses" EntitySet="Rewarded_Cactuses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Collection_of_rare_cactiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cactus">
+          <Key>
+            <PropertyRef Name="ID_Cactus" />
+          </Key>
+          <Property Name="ID_Cactus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Cactus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type_of_cactus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age_cactus" Type="Int32" />
+          <Property Name="Origins_cactus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost_cactus" Type="Int32" />
+          <Property Name="Manuals_cactus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contestant" Relationship="Self.FK_Contestant_Cactus" FromRole="Cactus" ToRole="Contestant" />
+          <NavigationProperty Name="Rewarded_Cactuses" Relationship="Self.FK_Rewarded_Cactuses_Cactus" FromRole="Cactus" ToRole="Rewarded_Cactuses" />
+        </EntityType>
+        <EntityType Name="Contestant">
+          <Key>
+            <PropertyRef Name="ID_Constestant" />
+          </Key>
+          <Property Name="ID_Cactus" Type="Int32" Nullable="false" />
+          <Property Name="ID_Exibition" Type="Int32" />
+          <Property Name="ID_Constestant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cactus" Relationship="Self.FK_Contestant_Cactus" FromRole="Contestant" ToRole="Cactus" />
+          <NavigationProperty Name="Exibitions" Relationship="Self.FK_Contestant_Exibitions" FromRole="Contestant" ToRole="Exibitions" />
+        </EntityType>
+        <EntityType Name="Exibitions">
+          <Key>
+            <PropertyRef Name="ID_Exibition" />
+          </Key>
+          <Property Name="ID_Exibition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Exibition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Exibition" Type="DateTime" Precision="0" />
+          <Property Name="Place_Exibition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rewards_Exibition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Commentaries" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contestant" Relationship="Self.FK_Contestant_Exibitions" FromRole="Exibitions" ToRole="Contestant" />
+          <NavigationProperty Name="Rewarded_Cactuses" Relationship="Self.FK_Rewarded_Cactuses_Exibitions" FromRole="Exibitions" ToRole="Rewarded_Cactuses" />
+        </EntityType>
+        <EntityType Name="Rewarded_Cactuses">
+          <Key>
+            <PropertyRef Name="ID_RewardCactuses" />
+          </Key>
+          <Property Name="ID_RewardCactuses" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cactus" Type="Int32" />
+          <Property Name="ID_Exibition" Type="Int32" />
+          <NavigationProperty Name="Cactus" Relationship="Self.FK_Rewarded_Cactuses_Cactus" FromRole="Rewarded_Cactuses" ToRole="Cactus" />
+          <NavigationProperty Name="Exibitions" Relationship="Self.FK_Rewarded_Cactuses_Exibitions" FromRole="Rewarded_Cactuses" ToRole="Exibitions" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Contestant_Cactus">
+          <End Role="Cactus" Type="Self.Cactus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Contestant" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cactus">
+              <PropertyRef Name="ID_Cactus" />
+            </Principal>
+            <Dependent Role="Contestant">
+              <PropertyRef Name="ID_Cactus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewarded_Cactuses_Cactus">
+          <End Role="Cactus" Type="Self.Cactus" Multiplicity="0..1" />
+          <End Role="Rewarded_Cactuses" Type="Self.Rewarded_Cactuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cactus">
+              <PropertyRef Name="ID_Cactus" />
+            </Principal>
+            <Dependent Role="Rewarded_Cactuses">
+              <PropertyRef Name="ID_Cactus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contestant_Exibitions">
+          <End Role="Exibitions" Type="Self.Exibitions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Contestant" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exibitions">
+              <PropertyRef Name="ID_Exibition" />
+            </Principal>
+            <Dependent Role="Contestant">
+              <PropertyRef Name="ID_Exibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewarded_Cactuses_Exibitions">
+          <End Role="Exibitions" Type="Self.Exibitions" Multiplicity="0..1" />
+          <End Role="Rewarded_Cactuses" Type="Self.Rewarded_Cactuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exibitions">
+              <PropertyRef Name="ID_Exibition" />
+            </Principal>
+            <Dependent Role="Rewarded_Cactuses">
+              <PropertyRef Name="ID_Exibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Collection_of_rare_cactiEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cactus" EntityType="Self.Cactus" />
+          <EntitySet Name="Contestant" EntityType="Self.Contestant" />
+          <EntitySet Name="Exibitions" EntityType="Self.Exibitions" />
+          <EntitySet Name="Rewarded_Cactuses" EntityType="Self.Rewarded_Cactuses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Contestant_Cactus" Association="Self.FK_Contestant_Cactus">
+            <End Role="Cactus" EntitySet="Cactus" />
+            <End Role="Contestant" EntitySet="Contestant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewarded_Cactuses_Cactus" Association="Self.FK_Rewarded_Cactuses_Cactus">
+            <End Role="Cactus" EntitySet="Cactus" />
+            <End Role="Rewarded_Cactuses" EntitySet="Rewarded_Cactuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contestant_Exibitions" Association="Self.FK_Contestant_Exibitions">
+            <End Role="Exibitions" EntitySet="Exibitions" />
+            <End Role="Contestant" EntitySet="Contestant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewarded_Cactuses_Exibitions" Association="Self.FK_Rewarded_Cactuses_Exibitions">
+            <End Role="Exibitions" EntitySet="Exibitions" />
+            <End Role="Rewarded_Cactuses" EntitySet="Rewarded_Cactuses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Collection_of_rare_cactiModelContainer" CdmEntityContainer="Collection_of_rare_cactiEntities2">
+          <EntitySetMapping Name="Cactus">
+            <EntityTypeMapping TypeName="Collection_of_rare_cactiModel.Cactus">
+              <MappingFragment StoreEntitySet="Cactus">
+                <ScalarProperty Name="ID_Cactus" ColumnName="ID_Cactus" />
+                <ScalarProperty Name="Name_Cactus" ColumnName="Name_Cactus" />
+                <ScalarProperty Name="Type_of_cactus" ColumnName="Type_of_cactus" />
+                <ScalarProperty Name="Age_cactus" ColumnName="Age_cactus" />
+                <ScalarProperty Name="Origins_cactus" ColumnName="Origins_cactus" />
+                <ScalarProperty Name="Cost_cactus" ColumnName="Cost_cactus" />
+                <ScalarProperty Name="Manuals_cactus" ColumnName="Manuals_cactus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contestant">
+            <EntityTypeMapping TypeName="Collection_of_rare_cactiModel.Contestant">
+              <MappingFragment StoreEntitySet="Contestant">
+                <ScalarProperty Name="ID_Cactus" ColumnName="ID_Cactus" />
+                <ScalarProperty Name="ID_Exibition" ColumnName="ID_Exibition" />
+                <ScalarProperty Name="ID_Constestant" ColumnName="ID_Constestant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exibitions">
+            <EntityTypeMapping TypeName="Collection_of_rare_cactiModel.Exibitions">
+              <MappingFragment StoreEntitySet="Exibitions">
+                <ScalarProperty Name="ID_Exibition" ColumnName="ID_Exibition" />
+                <ScalarProperty Name="Name_Exibition" ColumnName="Name_Exibition" />
+                <ScalarProperty Name="Date_Exibition" ColumnName="Date_Exibition" />
+                <ScalarProperty Name="Place_Exibition" ColumnName="Place_Exibition" />
+                <ScalarProperty Name="Rewards_Exibition" ColumnName="Rewards_Exibition" />
+                <ScalarProperty Name="Commentaries" ColumnName="Commentaries" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rewarded_Cactuses">
+            <EntityTypeMapping TypeName="Collection_of_rare_cactiModel.Rewarded_Cactuses">
+              <MappingFragment StoreEntitySet="Rewarded_Cactuses">
+                <ScalarProperty Name="ID_RewardCactuses" ColumnName="ID_RewardCactuses" />
+                <ScalarProperty Name="ID_Cactus" ColumnName="ID_Cactus" />
+                <ScalarProperty Name="ID_Exibition" ColumnName="ID_Exibition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Collection_of_rare_cactiModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
